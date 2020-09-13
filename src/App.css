@@ -17,6 +17,17 @@
   color: #61dafb;
 }
 
+@media all and (min-width: 480px) {
+  .Login {
+    padding: 60px 0;
+  }
+
+  .Login form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+}
+
 h1 {
     font-size: 6em;
     font-weight: 100;
@@ -61,6 +72,6 @@ h2 {
   text-transform: uppercase;
 }
 
-.question {
-  margin-bottom: 2em;
+.display-linebreak {
+  white-space: pre-line;
 }
