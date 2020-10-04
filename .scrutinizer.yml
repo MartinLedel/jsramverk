@@ -1,6 +1,6 @@
 build:
     nodes:
-        functional-tests:
+        node-with-functional-tests:
             environment:
                 selenium: true
         coverage:
