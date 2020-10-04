@@ -2,6 +2,8 @@ build:
     nodes:
         node-with-functional-tests:
             environment:
+                google_chrome:
+                    use_latest: true
                 selenium: true
         coverage:
             tests:
