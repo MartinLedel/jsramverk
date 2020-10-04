@@ -1,8 +1,8 @@
 build:
-    environment:
-        variables:
-            JWT_SECRET: 'jwtSecret'
     nodes:
+        functional-tests:
+            environment:
+                selenium: true
         coverage:
             tests:
                 override:
