@@ -50,9 +50,10 @@ export const CreateReport = props => {
             <option>kmom02</option>
             <option>kmom02</option>
             <option>kmom03</option>
+            <option>kmom04</option>
             <option>kmom05</option>
             <option>kmom06</option>
-            <option>kmom07</option>
+            <option>kmom10</option>
           </FormControl>
       </FormGroup>
       <FormGroup controlId="kmomText">
