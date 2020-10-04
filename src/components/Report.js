@@ -2,18 +2,19 @@ import React, { useEffect, useState } from 'react';
 
 const Report = ({ match }) => {
     const kmom = match.params.kmom ;
-    const [text, setText] = useState([]);
+    const [text, setText] = useState("");
+    const apiUrl = "me-api.ml-jsramverk.me";
+
     useEffect(() => {
-        fetch(`http://localhost:1337/reports/week/${kmom}`)
+        fetch(`https://` + apiUrl + `/reports/week/${kmom}`)
             .then(res => res.json())
-            .then(res => setText(res.data));
+            .then(res => setText(res.data.texts));
     }, [kmom]);
-    console.log(text);
     return (
     <main>
       <h2>{ "kmom0" + kmom }</h2>
       <div className="display-linebreak">
-        { text.texts }
+        { text }
      </div>
     </main>
     );

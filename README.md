@@ -1,3 +1,9 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/MartinLedel/jsramverk/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/MartinLedel/jsramverk/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/MartinLedel/jsramverk/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/MartinLedel/jsramverk/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/MartinLedel/jsramverk/badges/build.png?b=master)](https://scrutinizer-ci.com/g/MartinLedel/jsramverk/build-status/master)
+
+[![Build Status](https://travis-ci.org/MartinLedel/jsramverk.svg?branch=master)](https://travis-ci.org/MartinLedel/jsramverk)
+
 ## Setup
 
 1. Clone the repo with `git clone https://github.com/MartinLedel/jsramverk`

@@ -6,6 +6,7 @@ export const Login = props => {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const apiUrl = "me-api.ml-jsramverk.me";
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -19,7 +20,7 @@ export const Login = props => {
           password: password
       }
 
-      fetch("http://localhost:1337/login", {
+      fetch(`https://` + apiUrl + `/login`, {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -30,7 +31,6 @@ export const Login = props => {
         .then(res => {
             return res.json();
         }).then(res => {
-            console.log(res);
             props.jwtAuth(res.data.token);
             history.push("/");
         })

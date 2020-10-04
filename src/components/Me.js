@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 const Me = () => {
     const [message, setMessage] = useState('');
+    const apiUrl = "me-api.ml-jsramverk.me";
+
     useEffect(() => {
-        fetch(`http://localhost:1337/`)
+        fetch(`https://` + apiUrl + `/`)
             .then(res => res.json())
             .then(res => setMessage(res.data.text));
     }, []);

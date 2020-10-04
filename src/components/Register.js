@@ -6,6 +6,7 @@ export default function Register() {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const apiUrl = "me-api.ml-jsramverk.me";
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -19,7 +20,7 @@ export default function Register() {
           password: password
       }
 
-      fetch("http://localhost:1337/register", {
+      fetch(`https://` + apiUrl + `/register`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {

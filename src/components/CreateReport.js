@@ -4,6 +4,7 @@ import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 export const CreateReport = props => {
   const [kmom, setKmom] = useState("kmom01");
   const [kmomText, setText] = useState("");
+  const apiUrl = "me-api.ml-jsramverk.me";
 
   function validateForm() {
     return kmom.length > 0 && kmomText.length > 0;
@@ -17,7 +18,7 @@ export const CreateReport = props => {
           kmomText: kmomText
       }
 
-      fetch("http://localhost:1337/reports", {
+      fetch(`https://` + apiUrl + `/reports`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
