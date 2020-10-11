@@ -23,6 +23,7 @@ export const NavbarComponent = props => {
                   <NavDropdown.Item href="/reports/week/3">kmom03</NavDropdown.Item>
                   <NavDropdown.Item href="/reports/week/4">kmom04</NavDropdown.Item>
                 </NavDropdown>
+                <Nav.Link href="/chat">Chat</Nav.Link>
                 {props.jwt ? (
                             <Nav.Link onClick={props.logout}>Logout</Nav.Link>
                         ) : (

@@ -75,3 +75,27 @@ h2 {
 .display-linebreak {
   white-space: pre-line;
 }
+
+.all-messages {
+    width: 50%;
+    margin: 0 auto;
+    height: 30vh;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.all-messages p:nth-child(2n) {
+    background-color: #ccc;
+}
+
+.new-message {
+    width: 25%;
+    margin: 0 auto;
+    height: 5vh;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}

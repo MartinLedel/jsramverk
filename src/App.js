@@ -5,6 +5,7 @@ import NavbarComponent from './components/Navbar.js';
 import Me from './components/Me.js';
 import Report from './components/Report.js';
 import CreateReport from './components/CreateReport.js';
+import SocketChat from './components/SocketChat.js';
 import Login from './components/Login.js';
 import Register from './components/Register.js';
 import './App.css';
@@ -31,6 +32,7 @@ function App() {
           exact path="/reports"
           render={props => <CreateReport {...props} jwt={jwt} />}
       />
+      <Route path="/chat" component={SocketChat} />
       <Route
           path="/login"
           render={props => <Login {...props} jwtAuth={jwtAuth} />}
