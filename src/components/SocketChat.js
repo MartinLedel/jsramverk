@@ -84,6 +84,10 @@ export const SocketChat = () => {
         return chatData.user.length > 0;
     }
 
+    function validateMsg() {
+        return chatData.message.length > 0;
+    }
+
     return (
         <main>
             <h1>Websocket chatt</h1>
@@ -102,15 +106,17 @@ export const SocketChat = () => {
                         <InputGroup.Text id="basic-addon1">@msg</InputGroup.Text>
                       </InputGroup.Prepend>
                       <FormControl
+                        placeholder="Message"
                         aria-label="Message"
                         aria-describedby="basic-addon1"
+                        value={chatData.message}
                         onChange={savingMessage}
                         onKeyDown={messageHandleKeyDown}
                       />
                       <Button
                           block
+                          disabled={!validateMsg()}
                           onClick={sendMessage}
-                          type="submit"
                       >
                           Send Message
                       </Button>
@@ -124,6 +130,7 @@ export const SocketChat = () => {
                     placeholder="Username"
                     aria-label="Username"
                     aria-describedby="basic-addon1"
+                    value={chatData.user}
                     onChange={savingUser}
                     onKeyDown={userHandleKeyDown}
                   />
