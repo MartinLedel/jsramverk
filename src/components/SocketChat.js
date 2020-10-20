@@ -10,26 +10,53 @@ export const SocketChat = () => {
         user: '',
         isConnected: false,
     });
-
-    const [chatMessages, setChatMessages] = useState([]);
+    const [chatMessages, setChatMessages] = useState({
+        chat: [],
+        loaded: false,
+    });
+    const apiUrl = "http://localhost:1337";
+    const chatUrl = "http://localhost:8300";
 
     useEffect(() => {
-        socket = io('https://socket-server.ml-jsramverk.me');
+        socket = io(chatUrl);
     }, []);
 
     useEffect(() => {
-        socket.on('chat message', function (data) {
-            setChatMessages(data);
+        fetch(apiUrl + '/chat/history', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+          .then(res => res.json())
+          .then(res => {
+              console.log(res);
+              setChatMessages({
+                  chat: res.data,
+                  loaded: true
+              });
+          })
+          .catch(error => console.error('Error:', error));
+
+        socket.on('chat message', function (res) {
+            setChatMessages({
+                ...chatMessages,
+                chat: res,
+            });
         });
 
-        socket.on('user broadcast', function (data) {
-            setChatMessages(data);
+        socket.on('user broadcast', function (res) {
+            setChatMessages({
+                ...chatMessages,
+                chat: res,
+            });
             setChatData({
                 ...chatData,
                 isConnected: true,
             });
         });
-    }, [chatMessages, chatData]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const savingMessage = event => {
         setChatData({
@@ -81,7 +108,7 @@ export const SocketChat = () => {
     };
 
     function validateNick() {
-        return chatData.user.length > 0;
+        return chatData.user.length > 0 && chatMessages.loaded;
     }
 
     function validateMsg() {
@@ -93,8 +120,8 @@ export const SocketChat = () => {
             <h1>Websocket chatt</h1>
 
             <h2>Messages:</h2>
-            <div ref={chatBox}  className="all-messages">
-                {chatMessages.map((msg, i) => (
+            <div className="all-messages" ref={chatBox}>
+                {chatMessages.chat.map((msg, i) => (
                    <p key={i}>
                        {msg}
                    </p>
