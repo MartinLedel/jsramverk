@@ -16,14 +16,8 @@ export const SocketChat = () => {
     });
     const apiUrl = "https://me-api.ml-jsramverk.me";
     const chatUrl = "https://socket-server.ml-jsramverk.me";
-
-    async function addMsgToArr(arr, res) {
-        chatMessages.chat.map((msg, i) => (
-            arr.push(msg);
-        ));
-        arr.push(res);
-        return arr;
-    }
+    // const apiUrl = "http://localhost:1337";
+    // const chatUrl = "http://localhost:8300";
 
     useEffect(() => {
         socket = io(chatUrl);
@@ -39,27 +33,29 @@ export const SocketChat = () => {
           .then(res => res.json())
           .then(res => {
               console.log(res);
+
               setChatMessages({
                   chat: res.data,
                   loaded: true
               });
+              chatBox.current.scrollTop = 1;
           })
           .catch(error => console.error('Error:', error));
+    }, []);
 
+    useEffect(() => {
         socket.on('chat message', function (res) {
-            let chatArr = [];
+            let chatArr = chatMessages.chat.concat(res);
 
-            chatArr = await addMsgToArr(chatArr, res);
             setChatMessages({
                 ...chatMessages,
                 chat: chatArr,
             });
+            chatBox.current.scrollTop = 1;
         });
 
         socket.on('user broadcast', function (res) {
-            let chatArr = [];
-
-            chatArr = await addMsgToArr(chatArr, res);
+            let chatArr = chatMessages.chat.concat(res);
             setChatMessages({
                 ...chatMessages,
                 chat: chatArr,
@@ -68,9 +64,9 @@ export const SocketChat = () => {
                 ...chatData,
                 isConnected: true,
             });
+            chatBox.current.scrollTop = 1;
         });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [chatMessages, chatData]);
 
     const savingMessage = event => {
         setChatData({
@@ -92,9 +88,8 @@ export const SocketChat = () => {
         socket.emit('chat message', {
             message: chatData.message,
             time: time.toLocaleTimeString().slice(0, -3),
-            user: chatData.user
+            user: sessionStorage.getItem('chatUser')
         });
-        chatBox.current.scrollTop = 1;
     };
 
     const savingUser = event => {
