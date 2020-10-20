@@ -14,8 +14,16 @@ export const SocketChat = () => {
         chat: [],
         loaded: false,
     });
-    const apiUrl = "http://localhost:1337";
-    const chatUrl = "http://localhost:8300";
+    const apiUrl = "https://me-api.ml-jsramverk.me";
+    const chatUrl = "https://socket-server.ml-jsramverk.me";
+
+    async function addMsgToArr(arr, res) {
+        chatMessages.chat.map((msg, i) => (
+            arr.push(msg);
+        ));
+        arr.push(res);
+        return arr;
+    }
 
     useEffect(() => {
         socket = io(chatUrl);
@@ -39,16 +47,22 @@ export const SocketChat = () => {
           .catch(error => console.error('Error:', error));
 
         socket.on('chat message', function (res) {
+            let chatArr = [];
+
+            chatArr = await addMsgToArr(chatArr, res);
             setChatMessages({
                 ...chatMessages,
-                chat: res,
+                chat: chatArr,
             });
         });
 
         socket.on('user broadcast', function (res) {
+            let chatArr = [];
+
+            chatArr = await addMsgToArr(chatArr, res);
             setChatMessages({
                 ...chatMessages,
-                chat: res,
+                chat: chatArr,
             });
             setChatData({
                 ...chatData,
